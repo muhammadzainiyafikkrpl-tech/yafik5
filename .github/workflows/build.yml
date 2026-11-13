@@ -1,0 +1,23 @@
+name: Build yafik5 EXE
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build-yafik5:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout kode
+        uses: actions/checkout@v4
+
+      - name: Compile C++ menjadi EXE
+        run: g++ -static "yafik5.cpp" -o "yafik5.exe"
+
+      - name: Upload file EXE
+        uses: actions/upload-artifact@v4
+        with:
+          name: hasil-yafik5
+          path: "yafik5.exe"
